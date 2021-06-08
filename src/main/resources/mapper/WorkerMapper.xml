@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:填写映射当前的Mapper接口，所有的增删改查的参数和返回值类型，
+		就可以直接填写缩写，不区分大小写，直接通过方法名去找类型-->
+
+<mapper namespace="com.example.kaoqin.dao.WorkerDao">
+    <!-- sql:里面可以写入一个共同的sql代码，用于提取重复的代码。
+
+        要使用该代码的时候就直接使用<include>标签
+        id:为提取的sql代码，取一个id，起标识作用
+         -->
+
+    <resultMap type="com.example.kaoqin.model.Worker" id="studentResultMap" >
+        <id property="number" column="number" />
+        <result property="gender" column="gender" />
+        <result property="age" column="age" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="department" column="department" />
+    </resultMap>
+
+    <insert id="insertWorker">
+        insert into worker (gender,age,department,password,username) values
+        (#{gender},#{age},#{department},#{password},#{username})
+    </insert>
+    <select id="logining" parameterType="string" resultType="com.example.kaoqin.model.Worker" resultMap="studentResultMap">
+        select * from worker
+        where username=#{username} and password=#{password}
+    </select>
+        <select id="selectnamenobody" parameterType="string" resultType="com.example.kaoqin.model.Worker" resultMap="studentResultMap">
+        select username from worker
+        where username=#{username}
+    </select>
+    <select id="findpersoninfo" parameterType="integer" resultType="com.example.kaoqin.model.Worker" resultMap="studentResultMap">
+        select * from worker
+        where number=#{number}
+    </select>
+</mapper>

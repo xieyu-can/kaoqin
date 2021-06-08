@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>打卡记录</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="../static/css/ref.css" th:href="@{/css/ref.css}">
+    <style>
+        #div1viv{
+            width: 800px;
+            height: 500px;
+            margin-top: 50px;
+            margin-right: 100px;
+            float: left;
+            margin-left: 400px;
+            margin-top: 30px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div th:insert="ref::#div1"></div>
+<div th:insert="ref::#div2"></div>
+<div class="container" id="div1viv">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>machine_number</td>
+            <td>worker_number</td>
+            <td>shijian</td>
+            <td>cishu</td>
+            <td colspan="2" style="text-align: center">操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="can:${page.records}">
+            <td th:text="${can.getMachine_number()}">machine_number</td>
+            <td th:text="${can.getWorker_number()}">worker_number</td>
+            <td th:text="${can.getShijian()}">shijian</td>
+            <td th:text="${can.getCishu()}">cishu</td>
+            <td colspan="2" style="text-align: center"><a type="button" class="btn btn-danger">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row-fluid" id="youcan">
+        <div class="span6">
+            <div class="dataTables_info">showing [[${page.current}]] to [[${page.pages}]] of [[${page.total}]] entries
+
+            </div>
+        </div>
+        <div class="span6" style="float: left">
+            <nav>
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <!--               给链接传参数-->
+                    <li th:each="num:${#numbers.sequence(1,page.pages)}" th:class="${num==page.current?'active':''}"><a th:href="@{/dakejilu(pn=${num})}">[[${num}]]</a></li>
+                    <li><a href="#">&raquo;</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+<script src="../static/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script th:inline="javascript">
+    var  contextPath=[[${#request.getContextPath()}]];
+</script>
+<script>
+    var months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var days=[];
+    days[0]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[1]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日'];
+    days[2]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[3]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[4]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[5]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[6]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[7]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[8]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[9]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[10]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[11]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    // var yy=document.querySelector('#years');
+    var mm=document.querySelector("#month");
+    var dd=document.querySelector("#day");
+    months.forEach(function (val,index) {
+        mm.add(new Option(val,index))
+    });
+    mm.onchange=function () {
+        var index=this.value;
+        dd.length=0;
+        days[index].forEach(function (val, index) {
+            dd.add(new Option(val,index));
+        });
+    }
+    mm.onchange();
+</script>
+</body>
+</html>

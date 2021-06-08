@@ -1,0 +1,66 @@
+#div1{
+    background-color: #5bc0de;
+    height: 50px;
+    margin: auto 0;
+    padding: 0;
+}
+nav{
+    text-decoration: none;
+}
+#toubiaotilan{
+    text-decoration: none;
+    float: left;
+    margin-left: 1000px;
+
+}
+#toubiaotilan li{
+    list-style: none;
+    float: left;
+    margin: 20px;
+}
+#div2{
+    width: 320px;
+    height: 500px;
+    /*background-color: #5cb85c;*/
+    margin-top: 30px;
+    float: left;
+    margin-right: 90px;
+    margin-left: 20px;
+    /*margin-right: 5%;*/
+    position: relative;
+}
+#div3{
+    width: 800px;
+    height: 500px;
+    margin-top: 30px;
+    margin-right: 100px;
+    background-color: #c9302c;
+    float: left;
+}
+#nav1{
+    position: absolute;
+}
+#ul1{
+    text-decoration: none;
+    padding:0;
+    width: 320px;
+}
+#ul1 li{
+    list-style: none;
+    line-height: 45px;
+    background-color: #5bc0de;
+    width: 320px;
+    text-align: center;
+    padding: 0;
+}
+#ul1 li:hover{
+    background-color: #c9302c;
+    cursor: pointer;
+}
+#ul1 li a{
+    text-decoration: none;
+}
+#div2xiadiv img{
+    width: 320px;
+    height: 320px;
+}

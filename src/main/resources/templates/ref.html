@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>考勤</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="../static/css/ref.css" th:href="@{/css/ref.css}">
+<!--    <style>-->
+<!--        #div1{-->
+<!--            background-color: #5bc0de;-->
+<!--            height: 50px;-->
+<!--            margin: auto 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        nav{-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        #toubiaotilan{-->
+<!--           text-decoration: none;-->
+<!--           float: left;-->
+<!--           margin-left: 1000px;-->
+
+<!--        }-->
+<!--        #toubiaotilan li{-->
+<!--            list-style: none;-->
+<!--            float: left;-->
+<!--            margin: 20px;-->
+<!--        }-->
+<!--        #div2{-->
+<!--            width: 320px;-->
+<!--            height: 500px;-->
+<!--            /*background-color: #5cb85c;*/-->
+<!--            margin-top: 30px;-->
+<!--            float: left;-->
+<!--            margin-right: 90px;-->
+<!--            margin-left: 20px;-->
+<!--            /*margin-right: 5%;*/-->
+<!--            position: relative;-->
+<!--        }-->
+<!--        #div3{-->
+<!--            width: 800px;-->
+<!--            height: 500px;-->
+<!--            margin-top: 30px;-->
+<!--            margin-right: 100px;-->
+<!--            background-color: #c9302c;-->
+<!--            float: left;-->
+<!--        }-->
+<!--        #nav1{-->
+<!--            position: absolute;-->
+<!--        }-->
+<!--        #ul1{-->
+<!--            text-decoration: none;-->
+<!--            padding:0;-->
+<!--            width: 320px;-->
+<!--        }-->
+<!--        #ul1 li{-->
+<!--            list-style: none;-->
+<!--            line-height: 45px;-->
+<!--            background-color: #5bc0de;-->
+<!--            width: 320px;-->
+<!--            text-align: center;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        #ul1 li:hover{-->
+<!--            background-color: #c9302c;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--        #ul1 li a{-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        #div2xiadiv img{-->
+<!--            width: 320px;-->
+<!--            height: 320px;-->
+<!--        }-->
+<!--    </style>-->
+</head>
+<body>
+<div id="div1">
+    <nav>
+        <ul id="toubiaotilan">
+            <li th:text="${name}">xieyucan</li>
+            <li>
+                <p>请选择月份和日期号</p>
+            </li>
+            <li>
+<!--                <select id="year"></select>-->
+                <select id="month"></select>
+                <select id="day"></select>
+            </li>
+            <li><a><button type="submit">提交</button></a></li>
+        </ul>
+    </nav>
+</div>
+<div id="div2">
+    <div id="div2xiadiv">
+        <img src="../static/photo/npytx.jpg" th:src="@{/photo/npytx.jpg}">
+    </div>
+    <nav id="nav1">
+        <ul id="ul1">
+            <li><a href="personinfo.html" th:href="@{/findpersoninfo}">个人资料</a></li>
+            <li><a href="dakarecord.html" th:href="@{/dakejilu}">打卡记录</a></li>
+            <li><a>打卡签到</a></li>
+        </ul>
+    </nav>
+</div>
+<div id="div3">
+
+</div>
+
+<script src="../static/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+<script>
+    var months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var days=[];
+    days[0]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[1]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日'];
+    days[2]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[3]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[4]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[5]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[6]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[7]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[8]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[9]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    days[10]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日'];
+    days[11]=['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日',
+        '11日','12日','13日','14日','15日','16日','17日','18日','19日','20日',
+        '21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日'];
+    // var yy=document.querySelector('#years');
+    var mm=document.querySelector("#month");
+    var dd=document.querySelector("#day");
+    months.forEach(function (val,index) {
+        mm.add(new Option(val,index))
+    });
+    mm.onchange=function () {
+        var index=this.value;
+        dd.length=0;
+        days[index].forEach(function (val, index) {
+            dd.add(new Option(val,index));
+        });
+    }
+    mm.onchange();
+</script>
+<script>
+
+</script>
+</body>
+</html>

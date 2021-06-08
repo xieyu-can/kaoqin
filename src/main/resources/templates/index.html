@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <style>
+        #table{
+            width: 400px;
+            height: 160px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+    </style>
+
+
+<!--    <script src="../static/js/bootstrap.js"></script>-->
+</head>
+<body>
+<div class="container">
+    <form class="form-horizontal" method="post" action="/registering">
+        <table id="table">
+            <tr class="form-group">
+                <td><label>姓名</label></td>
+                <td ><input type="text" class="form-control" th:onblur="|can(this)|" id="username" name="username"></td>
+                <td><span id="nameyou"></span></td>
+            </tr>
+            <tr class="form-group">
+                <td><label>密码</label></td>
+                <td ><input type="password" class="form-control" name="password" id="password" th:name="password" onblur="qq()"></td>
+                <td><span id="mima" style="color: red"></span></td>
+            </tr>
+            <tr class="form-group">
+                <td><label>性别</label></td>
+                <td ><input type="text" class="form-control" name="gender" id="gender" th:onblur="|ww(this)|"></td>
+                <td><span id="xinbie" style="color: red"></span></td>
+            </tr>
+            <tr class="form-group">
+                <td><label>年龄</label></td>
+                <td ><input type="text" class="form-control" name="age" id="age" th:onblur="|ee(this)|"></td>
+                <td><span id="nianlin" style="color: red"></span></td>
+            </tr>
+            <tr class="form-group">
+                <td><label>部门</label></td>
+                <td ><input type="text" class="form-control" name="department" id="department" th:onblur="|rr(this)|"></td>
+                <td><span id="bumeng" style="color: red"></span></td>
+            </tr>
+            <tr class="form-group">
+                <td><a><button type="submit" class="btn btn-info" id="tijiao" >提交</button></a></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+<script src="../static/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script th:inline="javascript">
+    var  contextPath=[[${#request.getContextPath()}]];
+</script>
+<script>
+    function can(obj) {
+
+
+        $.ajax({
+            url:contextPath+"/cancan",
+            data:{"username":obj.value},
+            method:"post",
+            success:function (data) {
+                if(data.toString()=="ok")
+                {
+                    $("#nameyou").css("color","green");
+                    $("#tijiao").css("color","green");
+                }
+                else{
+                    $("#nameyou").css("color","red");
+                }
+                $("#nameyou").html(data);
+            }
+        })
+    }
+</script>
+<script>
+    function qq() {
+        var pass=$("#password").val();
+        if(pass==0)
+        {
+            $("#mima").html("密码不能为空");
+        }
+        else{
+            $("#mima").css("color","green");
+            $("#mima").html("ok");
+        }
+    }
+    function ww() {
+        var xb=$("#gender").val();
+        if(xb==0)
+        {
+            $("#xinbie").html("性别不能为空");
+        }
+        else{
+            $("#xinbie").css("color","green");
+            $("#xinbie").html("ok");
+        }
+    }
+    function ee() {
+        var nianlin=$("#age").val();
+        if(nianlin==0)
+        {
+            $("#nianlin").html("年龄不能为空");
+        }
+        else{
+            $("#nianlin").css("color","green");
+            $("#nianlin").html("ok");
+        }
+    }
+    function rr() {
+        var department=$("#department").val();
+        if(department==0)
+        {
+            $("#bumeng").html("部门不能为空");
+        }
+        else{
+            $("#bumeng").css("color","green");
+            $("#bumeng").html("ok");
+        }
+    }
+</script>
+</body>
+</html>
+
